@@ -3,6 +3,14 @@ project(FO_Data_Handling)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(FO_Data_Handling main.cpp ${PROJECT_SOURCE_DIR}/lib/FO-MQTT/include/MQTT_Handler.h ${PROJECT_SOURCE_DIR}/lib/FO-MQTT/src/MQTT_Handler.cpp)
-include_directories(${PROJECT_SOURCE_DIR}/lib/FO-MQTT/lib/paho_c/include)
-target_link_libraries(${PROJECT_NAME} ${PROJECT_SOURCE_DIR}/lib/FO-MQTT/lib/paho_c/paho-mqtt3c.dll)
+include(ExternalProject)
+
+set(EXTERNAL_INSTALL_LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/lib)
+
+ExternalProject_Add(mqtt
+        GIT_REPOSITORY https://github.com/JobMeulenbeld/FO-MQTT.git
+        )
+
+include_directories(${EXTERNAL_INSTALL_LOCATION}/include)
+
+add_executable(${PROJECT_NAME} ${PROJECT_SOURCE_DIR}/main.cpp)

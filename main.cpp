@@ -2,9 +2,8 @@
 // Created by meule on 5/6/2023.
 //
 
+#include <iostream>
+
 int main(int argc, char* argv[]){
-
-
-
-    return 0;
+    std::cout << "Hello Job";
 }
